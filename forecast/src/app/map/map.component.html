@@ -1,0 +1,15 @@
+<div class="map-container">
+  <h1>How to Integrate Google Maps in Angular 16 - ItSolutionStuff.com</h1>
+
+<google-map height="300px"
+            width="500px"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="moveMap($event)"
+            (mapMousemove)="move($event)">
+</google-map>
+
+<div>Latitude: {{display?.lat}}</div>
+<div>Longitude: {{display?.lng}}</div>
+
+</div>

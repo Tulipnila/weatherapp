@@ -34,6 +34,7 @@ selectedCity:any[]=[];
   }
 
   onSearch(){
+    this.router.navigate(['/map']);
     this.service.getCity(this.cityName, 10)
     .subscribe
     (
@@ -55,7 +56,6 @@ selectedCity:any[]=[];
             weatherData => 
             {
               this.shareData.weatherDetails = weatherData;
-              this.router.navigate(['/chart']);
               console.log('gv:',weatherData)
               this.weatherDetails = weatherData;
             }

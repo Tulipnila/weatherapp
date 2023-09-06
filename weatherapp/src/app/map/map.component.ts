@@ -13,8 +13,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   private marker:L.Marker| undefined;
 
   cityName:any;
-  cityDetails = {};
-  weatherDetails = {};
   count:any[]=[];
 
   filteredCities: any[] = [];
@@ -28,30 +26,36 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
   
   ngAfterViewInit() {
+    this.searchCity();
     this.initMap();
   }
-
+  get cityDetails(){
+    return this.shareData.cityDetails;
+   }
+   get weatherDetails(){
+     return this.shareData.weatherDetails;
+   }
   searchCity() {
-    this.service.getCity(this.cityName, 5).subscribe((cityData) => {
 
-      if (cityData.results && cityData.results.length > 0) {
-        const lat = cityData.results[0].latitude;
-        const lon = cityData.results[0].longitude;
+      if (this.cityDetails.results && this.cityDetails.results.length > 0) {
+        const lat = this.cityDetails.results[0].latitude;
+        const lon = this.cityDetails.results[0].longitude;
 
         console.log('latitude:',lat);
         console.log('longitude:',lon);
   
         this.marker?.setLatLng([lat, lon]);
+        this.marker?.bindPopup('Location:',this.cityName).openPopup();
         this.map?.setView([lat, lon], 13);
 
       }
-    });
-  }
+    };
+  
 
   private initMap() {
     this.map = L.map('map', {
-      center: [0,0], 
-      zoom: 13, 
+      center: [28.63576,77.22445], 
+      zoom: 10, 
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -64,7 +68,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       iconAnchor:[16,32],
       popupAnchor:[0,-32],
     });
-    this.marker = L.marker([0,0], { icon:customIcon }).addTo(this.map);
+    this.marker = L.marker([28.63576,77.22445], { icon:customIcon }).addTo(this.map);
     // this.marker.bindPopup(``).openPopup();
   }
   onCityNameChange(value: string) {

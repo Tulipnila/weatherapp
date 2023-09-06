@@ -1,0 +1,51 @@
+<div class="nav-container">
+    <div class="left">
+        <div class="logo">
+            <img width="52" height="50" src="https://img.icons8.com/emoji/48/sun-behind-cloud.png" alt="sun-behind-cloud"/>
+            <h2>Weather</h2>
+        </div>
+        <div class="menu-icon"></div>
+    </div>
+    <div class="right">
+        <div class="top">
+            <div class="search">
+                <form #submit (submit)="onSearch()">
+                    <div class="locateimg"  (click)="onSearch()"></div>
+                    <input  id="input" 
+                            name="location" 
+                            placeholder="Enter City Name" 
+                            [(ngModel)]="cityName"  
+                            (input)="onCityNameChange(cityName)" 
+                            autocomplete="off"
+                            (focus)="location()">
+                    <button type="submit"></button>
+                </form>
+        
+                <ul *ngIf="filteredCities">
+                    <li *ngFor="let city of filteredCities" (click)="selectCity(city)" >
+                        {{city.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="cityData" *ngIf="cityDetails && weatherDetails">
+                <div class="city">
+                    <div>{{cityDetails.results[0].name}}</div>
+                    <div> {{cityDetails.results[0].country}}</div>
+                </div>
+                <div class="data">
+                    <p>Lat: {{ cityDetails.results[0].latitude }}</p>
+                    <p>Lng: {{ cityDetails.results[0].longitude }}</p>
+                </div>
+            </div> 
+                <div id="cloud">
+                    <div class="temp">
+                        {{ weatherDetails?.current_weather?.temperature}}°C
+                    </div> 
+                    <div class="date">{{date | date:'short'}}</div>
+                </div>
+        
+        </div>
+    </div>
+</div>

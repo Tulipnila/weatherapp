@@ -1,0 +1,58 @@
+
+.display-container{
+    display: flex;
+    flex-direction: column;
+}
+.mob-container{
+    display: none;
+}
+.top, .bottom{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    row-gap: 30px;
+    height: 200px;
+
+}
+.daily-cal{
+    width: 50px;
+    height: 50px;
+    background-image: url('../../images/cal.png');
+    background-size: 100% 100%;
+}
+.weather{
+    width: 200px;
+    height: 150px;
+    border: 2px solid rgb(220, 234, 245);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 10px 10px  rgb(181, 190, 239) ;
+}
+
+@media(max-width:600px) {
+    .display-container{
+        width: 100%;
+        height: 100%;
+    }
+    .weather{
+        font-size: 15px;
+       width: 80%;
+       height: 80%;
+        display: flex;
+        flex-grow: 1;
+        text-align: center;
+    }
+}
+@media(max-width:400px){
+    .display-container{
+        display: none;
+    }
+    .mob-container{
+        display: block;
+        
+    }
+    .mob-cloud{
+        display: flex;
+    }
+}

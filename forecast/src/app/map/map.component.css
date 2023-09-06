@@ -1,18 +1,46 @@
-.map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 30px;
+.map-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:30px;
+    gap:20px;
+    position: relative;
+}
+form{
+    padding-top: 5px;
+    border-radius: 10px;
+    position: relative;
+
+}
+input{
+    width: 300px;
+    height: 25px;
+    border-radius: 10px;
+
+}
+button{
+    position: absolute;
+    right: 15px;
+    top:10px;
+    border-radius: 10px;
+}
+#map{
+    width: 700px;
+    height: 350px;
+}
+ul{
+    list-style: none;
+    background-color: white;
+    position: absolute;
+    top:45px;
+    left:37%;
+    border-radius: 5px;
+    z-index:500;
+}
+li:hover{
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.551);
 }
 
-.map-frame {
-  border: 2px solid black;
-  height: 100%;
-  width: 100%;
-}
-
-#map {
-  height: 100%;
-}

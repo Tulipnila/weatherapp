@@ -33,16 +33,6 @@
                     <p>Lng: {{ cityDetails.results[0].longitude }}</p>
                 </div>
             </div> 
-            <div class="climateimg">
-                <div class="img">
-                    <div classs="icon sun"  
-                    *ngIf="weatherDetails.temperature >= 25"></div>
-                    <div class="icon cloud"  
-                        *ngIf="weatherDetails.temperature < 25 && weatherDetails?.current_weather?.temperature >= 15" ></div>
-                    <div class="icon rain" width="88" height="88"  *ngIf="weatherDetails?.current_weather?.temperature < 15" ></div>
-
-                </div>
-            </div>
                 <div id="cloud">
                     <div class="temp">
                         {{ weatherDetails?.current_weather?.temperature}}°C

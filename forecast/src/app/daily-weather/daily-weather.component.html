@@ -16,9 +16,13 @@
          </div>
     </div>
     <div class="bottom">
-           <div class="weather"><h3>Wind Speed:</h3> {{weatherDetails?.current_weather?.windspeed }} km/h</div>
-           <div class="weather"><h3>Wind Direction:</h3> {{weatherDetails?.current_weather?.winddirection}}</div>
-           <div class="weather"><h3>Humidity:</h3> {{weatherDetails?.hourly?.relativehumidity_2m[0]}}</div>
+            <div class="weather"><h3>Wind Speed:</h3> {{weatherDetails?.current_weather?.windspeed }} km/h
+                <span>༄</span>
+            </div>
+            <div class="weather"><h3>Wind Direction:</h3> {{weatherDetails?.current_weather?.winddirection}}</div>
+            <div class="weather"><h3>Humidity:</h3> {{weatherDetails?.hourly?.relativehumidity_2m[0]}} % 
+             <span>💧</span>
+            </div>
     </div>      
 </div>
 <div class="mob-container" *ngIf="weatherDetails">

@@ -7,7 +7,7 @@ export class TimeFormatPipe implements PipeTransform {
 
   transform(isoString: string): string {
     const timePart = isoString.split('T')[1];
-    const formattedTime = timePart.substring(0, 5); // Extract HH:mm part
+    const formattedTime = timePart.substring(0, 5)
     return formattedTime;
   }
 

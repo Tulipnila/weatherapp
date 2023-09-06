@@ -7,14 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'forecast';
-
-  // selectedDate:string ='';
-  // onDateSelected(date:string){
-  //   this.selectedDate = date;
-  // }
-
-  // inputValue: string = '';
-  // onInputValueChange(newValue:string){
-  //   this.inputValue = newValue;
-  // }
 }

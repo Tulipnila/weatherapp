@@ -1,7 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import { Chart } from 'chart.js/auto';
-import { DataService } from '../services/data.service';
-import { ShareDataService } from '../services/share-data.service';
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js/auto'
 
 @Component({
   selector: 'app-chart',
@@ -9,90 +7,73 @@ import { ShareDataService } from '../services/share-data.service';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  public chart:any;
-  public cityName:string = '';
 
-  constructor(private service:DataService, private shareData:ShareDataService){}
+  public chart:any;
+
+  constructor(){}
   ngOnInit(): void {
-    this.fetchWeatherData();
+    this.createChart();
   }
 
-  fetchWeatherData(){
-    const latitude = 52.52;
-    const longitude = 13.24;
-        this.service.getWeather(latitude,longitude).subscribe((chartData: any) => {
-          this.updateChart(chartData);
-          console.log('chart:',chartData)
-          console.log('fetchWeatherData:',this.fetchWeatherData)
-        });
-      
-      };
-
-  
-  updateChart(chartData:any){
-      const labels = chartData.time;
-      const temperatureData = chartData.hourly.temperature_2m;
-      const cloudCoverageData = chartData.hourly.cloudcover_mid;
-
-
-      this.chart=new Chart("MyChart", {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: "Temperature(C)",
-              data: temperatureData,
-              borderColor: 'rgb(255, 99, 132)',
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderWidth: 2,
-              pointBackgroundColor: 'rgb(255, 99, 132)',
-            },
-            {
-              label: "Cloud Coverage(%)",
-              data: cloudCoverageData,
-              borderColor: 'rgb(54, 162, 235)',
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderWidth: 2,
-              pointBackgroundColor: 'rgb(54, 162, 235)',
+ createChart(){
+    this.chart=new Chart("myChart", {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+          {
+            label: "Temperature(C) in Lahore",
+            data: [13, 16, 21, 28, 32, 34, 32, 31, 30, 26, 20, 14],
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(255, 99, 132)',
+          },
+          {
+            label: "Cloud Coverage(%) in Lahore",
+            data: [26, 29, 31, 24, 10, 3, 14, 16, 4, 5, 14, 23],
+            borderColor: 'rgb(54, 162, 235)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(54, 162, 235)',
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2.5,
+        scales: {
+          y: {
+            beginAtZero:true,
+            grid: {
+              color: 'rgba(0,0,0,0.1)',
             }
-          ]
+          },
+          x: {
+            grid:{
+              color: 'rgba(0,0,0,0.1)',
+            }
+          }
         },
-        options: {
-          aspectRatio:2.5,
-          scales: {
-            y: {
-              grid: {
-                color: 'rgba(0,0,0,0.1)',
-              }
+        plugins:{
+          tooltip:{
+            backgroundColor:'rgba(0,0,0,0.7)',
+            bodyFont:{
+              size:14,
             },
-            x: {
-              grid:{
-                color: 'rgba(0,0,0,0.1)',
+            titleFont:{
+              size:16,
+              weight:'bold',
+            }
+          },
+          legend:{
+            labels:{
+              font:{
+                size:14,
               }
             }
           },
-          plugins:{
-            tooltip:{
-              backgroundColor:'rgba(0,0,0,0.7)',
-              bodyFont:{
-                size:14,
-              },
-              titleFont:{
-                size:16,
-                weight:'bold',
-              }
-            },
-            legend:{
-              labels:{
-                font:{
-                  size:14,
-                }
-              }
-            },
-          }
         }
-      });
-    }
+      }
+    });
   }
-
+}

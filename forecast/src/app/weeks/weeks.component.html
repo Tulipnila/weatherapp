@@ -1,12 +1,16 @@
 <div class="fore-container">
-  <button id="left" (click)="shiftDates('left')"></button>
+  
 
   <div class="cast-container" *ngIf="weatherDetails">
-    <div class="cast" id="active" *ngFor="let forecast of forecastData; let i = index" [ngClass]="{'shift-left': shiftLeft, 'shift-right': shiftRight}"><br>
+    <div class="cast" id="active" *ngFor="let forecast of forecastData; let i = index"><br>
+      <div class="daily">
       <div class="day">{{shareData.getDayOfWeek(forecast.date)}}</div>
-      <div class="date">{{ forecast.date | date:'shortDate' }}</div>
+        <div class="date">{{ forecast.date | date:'shortDate' }}</div>
+      </div>
+      <div class="temp">
       <div class="high-temp">{{  weatherDetails?.daily?.temperature_2m_max[i] }} °</div>
       <div class="low-temp">{{ weatherDetails?.daily?.temperature_2m_min[i]  }} °</div>
+      </div>
       <div class="humidity">
         <span> 😰 </span>
         <div>{{weatherDetails?.hourly?.relativehumidity_2m[i] }}</div>
@@ -27,7 +31,6 @@
     </div>
   </div>
 
-  <button id="right" (click)="shiftDates('right')"></button>
   
 </div>
 

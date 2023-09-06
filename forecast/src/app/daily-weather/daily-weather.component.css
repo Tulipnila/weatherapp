@@ -29,12 +29,7 @@
     align-items: center;
     box-shadow: 5px 10px 10px  rgb(181, 190, 239) ;
 }
-.weather:hover{
-    width: 210px;
-    height: 160px;
-    transition-duration: 1000ms;
-    
-}
+
 @media(max-width:600px) {
     .display-container{
         width: 100%;

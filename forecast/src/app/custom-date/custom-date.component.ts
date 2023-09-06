@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ShareDataService } from '../services/share-data.service';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -8,40 +7,67 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./custom-date.component.css']
 })
 export class CustomDateComponent implements OnInit {
-  startDate:string='';
-  endDate:string='';
+  cityName: string = '';
+  startDate: string = '';
+  endDate: string = '';
+  forecastData: any[] = [];
+  forecastDates: Date[] = [];
+  latitude: number = 0;
+  longitude: number = 0;
 
-  cityName:string = '';
-  lat:any;
-  lon:any;
+  constructor(private service: DataService) {}
 
-  constructor(public shareData:ShareDataService,
-              public service: DataService){}
-  
-  ngOnInit(): void {
-  this.checkWeather();
-  }  
+  ngOnInit(): void {}
 
-  checkWeather(){
-    
-    this.service.getCity(this.cityName,5).subscribe (
-      data => {
-        this.shareData.cityDetails = data;
+  getCoordinates() {
+    if (!this.cityName) {
+      return;
+    }
 
-        if (data.results.length > 0) {
-          const lat = data.results[0].latitude;
-          const lon = data.results[0].longitude;
-        
-    this.service.getWeather(lat, lon).subscribe (
-      weatherData => {
-        this.shareData.weatherDetails = weatherData;
-          console.log('dsfdas:',weatherData)
-
-      } 
-    );
+    this.service.getCity(this.cityName, 5).subscribe(
+      (cityData) => {
+        if (cityData.results && cityData.results[0]) {
+          this.latitude = cityData.results[0].latitude;
+          this.longitude = cityData.results[0].longitude;
         }
+      },
+      (error) => {
+        console.error('Error fetching city coordinates:', error);
+      }
+    );
+  }
+
+  checkWeather() {
+    if (!this.startDate || !this.endDate || this.latitude === 0 || this.longitude === 0) {
+      return;
+    }
+
+    this.forecastData = [];
+
+    this.service.getDaysForecast(this.latitude, this.longitude, this.startDate, this.endDate).subscribe(
+      (weatherData) => {
+        for (const forecast of weatherData.forecast) {
+          this.forecastData.push({
+            date: forecast.date,
+            temperatureMax: forecast.temperatureMax,
+            temperatureMin: forecast.temperatureMin
+          });
+        }
+      },
+      (error) => {
+        console.error('Error fetching weather data:', error);
       }
     );
 
+    this.calculateForecastDates(new Date(this.startDate), new Date(this.endDate));
+  }
+
+  calculateForecastDates(startDate: Date, endDate: Date) {
+    this.forecastDates = [];
+
+    while (startDate <= endDate) {
+      this.forecastDates.push(new Date(startDate));
+      startDate.setDate(startDate.getDate() + 1);
+    }
   }
 }

@@ -8,39 +8,9 @@
     gap:20px;
     position: relative;
 }
-form{
-    padding-top: 5px;
-    border-radius: 10px;
-    position: relative;
 
-}
-input{
-    width: 300px;
-    height: 25px;
-    border-radius: 10px;
-
-}
-button{
-    position: absolute;
-    right: 15px;
-    top:10px;
-    border-radius: 10px;
-}
 #map{
     width: 1250px;
     height: 600px;
+    border-radius: 10px;
 }
-ul{
-    list-style: none;
-    background-color: rgb(92, 17, 17);
-    position: absolute;
-    top:20px;
-    left:37%;
-    border-radius: 5px;
-    z-index:500;
-}
-li:hover{
-    cursor: pointer;
-    background-color: rgba(128, 128, 128, 0.551);
-}
-

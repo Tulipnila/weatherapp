@@ -1,7 +1,6 @@
 import { Component, OnInit,HostListener, ElementRef, Output } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ShareDataService } from '../services/share-data.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +24,7 @@ selectedCity:any[]=[];
 
 
   constructor(private service: DataService,
-              public shareData: ShareDataService,private router:Router,
+              public shareData: ShareDataService,
               private elementRef:ElementRef){
                 this.selectedCity = this.shareData.getSelectedCity();
                }
@@ -34,7 +33,6 @@ selectedCity:any[]=[];
   }
 
   onSearch(){
-    this.router.navigate(['/map']);
     this.service.getCity(this.cityName, 10)
     .subscribe
     (
@@ -79,7 +77,6 @@ selectedCity:any[]=[];
     this.filteredCities=[];
     this.onSearch();
     this.shareData.setSelectedCity(city);
-
   }
   location(){
     this.cityName = '';

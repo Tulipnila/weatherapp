@@ -1,39 +1,39 @@
 
-  <div class="cast-container" *ngIf="weatherDetails">
-    <div class="cast" id="active" *ngFor="let forecast of forecastData; let i = index"><br>
-      <div class="daily">
-        <div class="day">{{shareData.getDayOfWeek(forecast.date)}}</div>
-        <div class="date">{{ forecast.date | date:'shortDate' }}</div>
-      </div>
-      <div class="mob-cloud">
-        <img classs="icon sun"  
-            *ngIf="weatherDetails?.current_weather?.temperature >= 25" 
-            src="https://img.icons8.com/emoji/sun-emoji.png" alt="sun-emoji" value="sunny"/>
-        <img class="icon cloud"  
-            *ngIf="weatherDetails?.current_weather?.temperature < 25 && weatherDetails?.current_weather?.temperature >= 15" 
-            src="https://img.icons8.com/external-justicon-flat-justicon/external-cloud-weather-justicon-flat-justicon-1.png" alt="external-cloud-weather-justicon-flat-justicon-1"/>
-        <img class="icon rain"   *ngIf="weatherDetails?.current_weather?.temperature < 15" 
-            src="https://img.icons8.com/fluency/storm-with-heavy-rain.png" alt="Rainy" value="Rainy">
-      </div>
-      <div class="temp">
-        <div class="high-temp">{{  weatherDetails?.daily?.temperature_2m_max[i] }} °</div>
-        <div class="low-temp">{{ weatherDetails?.daily?.temperature_2m_min[i]  }} °</div>
-      </div>
-      <div class="humidity">
-        <span> 😰 </span>
-        <div>{{weatherDetails?.hourly?.relativehumidity_2m[i] }} %</div>
-      </div>
-      <div class="uvIndex">
-        <span>🕶 </span>
-        <div class="uv-des">{{ weatherDetails?.daily?.uv_index_max[i] }}</div>
-      </div>
-      <div class="precipitation">
-        <span> ☔️ </span>
-        <div>{{ weatherDetails?.daily?.precipitation_sum[i] }} mm</div>
-      </div>
-      <div class="windspeed">
-        <span>🍃</span>
-        <div>{{ weatherDetails?.daily?.windspeed_10m_max[i] }} m/s</div>
-      </div>
+<div class="cast-container" *ngIf="weatherDetails">
+  <div class="cast" *ngFor="let forecast of forecastData; let i = index" [ngClass]="{ 'current-date': isCurrentDate(forecast.date) }"><br>
+    <div class="daily">
+      <div class="day">{{shareData.getDayOfWeek(forecast.date)}}</div>
+      <div class="date">{{ forecast.date | date:'shortDate' }}</div>
+    </div>
+    <div class="mob-cloud">
+      <img classs="icon sun"  
+          *ngIf="weatherDetails?.current_weather?.temperature >= 25" 
+          src="https://img.icons8.com/emoji/sun-emoji.png" alt="sun-emoji" value="sunny"/>
+      <img class="icon cloud"  
+          *ngIf="weatherDetails?.current_weather?.temperature < 25 && weatherDetails?.current_weather?.temperature >= 15" 
+          src="https://img.icons8.com/external-justicon-flat-justicon/external-cloud-weather-justicon-flat-justicon-1.png" alt="external-cloud-weather-justicon-flat-justicon-1"/>
+      <img class="icon rain"   *ngIf="weatherDetails?.current_weather?.temperature < 15" 
+          src="https://img.icons8.com/fluency/storm-with-heavy-rain.png" alt="Rainy" value="Rainy">
+    </div>
+    <div class="temp">
+      <div class="high-temp">{{  weatherDetails?.daily?.temperature_2m_max[i] }} °</div>
+      <div class="low-temp">{{ weatherDetails?.daily?.temperature_2m_min[i]  }} °</div>
+    </div>
+    <div class="humidity">
+      <span> 😰 </span>
+      <div>{{weatherDetails?.hourly?.relativehumidity_2m[i] }} %</div>
+    </div>
+    <div class="uvIndex">
+      <span>🕶 </span>
+      <div class="uv-des">{{ weatherDetails?.daily?.uv_index_max[i] }}</div>
+    </div>
+    <div class="precipitation">
+      <span> ☔️ </span>
+      <div>{{ weatherDetails?.daily?.precipitation_sum[i] }} mm</div>
+    </div>
+    <div class="windspeed">
+      <span>🍃</span>
+      <div>{{ weatherDetails?.daily?.windspeed_10m_max[i] }} m/s</div>
     </div>
   </div>
+</div>

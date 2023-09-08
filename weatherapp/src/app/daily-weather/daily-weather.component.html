@@ -1,11 +1,10 @@
 
-<h3>Right Now</h3>
+<h3 class="tab">Right Now</h3>
 <div class="display-container" *ngIf="weatherDetails && cityDetails">
-    <div class="top">
+    
         <div class="weather description"><h3>Today</h3>
             <div class="date">{{date | date}}</div>
             <div class="img daily-cal"></div>
-        
         </div>
         <div class="weather"><h3>Sunrise / Sunset:</h3> {{weatherDetails?.daily?.sunrise[0] | timeFormat}} AM / {{weatherDetails?.daily?.sunset[0] | timeFormat}} PM
             <span > 🌅 / 🌇 </span> </div>
@@ -14,8 +13,8 @@
          {{ getWeatherDescription(weatherDetails.current_weather.weathercode) }}
          )</div>
          </div>
-    </div>
-    <div class="bottom">
+    
+  
             <div class="weather"><h3>Wind Speed:</h3> {{weatherDetails?.current_weather?.windspeed }} km/h
                 <span>༄</span>
             </div>
@@ -23,9 +22,19 @@
             <div class="weather"><h3>Humidity:</h3> {{weatherDetails?.hourly?.relativehumidity_2m[0]}} % 
              <span>💧</span>
             </div>
+            <div class="weather"><h3>Cloud Cover:</h3> {{weatherDetails?.hourly?.cloudcover_high[0]}} % 
+                <span class="cloud"></span>
+            </div>
+            <div class="weather"><h3>UV Index:</h3> {{weatherDetails?.daily?.uv_index_max[0]}}  
+                <span class="uvindex"></span>
+            </div>
+            <div class="weather"><h3>precipitation Rain:</h3> {{weatherDetails?.daily?.precipitation_sum[0]}} mm 
+                <span>☔</span>
+            </div>
     </div>      
-</div>
+
 <div class="mob-container" *ngIf="weatherDetails">
+        <h3>Today</h3>
    
         <div class="mob-date">{{date | date:"medium"}}</div><br>
         <div class="mob-cloud">
@@ -40,18 +49,16 @@
         <p class="temp"> {{ weatherDetails?.current_weather?.temperature}}°C</p>
 
         </div>
-        <div class="weather-description">
-            {{ getWeatherDescription(weatherDetails?.current_weather?.weathercode) }}
-        </div>
+        
         <div id="details">
-           <p>Weather Code: {{weatherDetails?.current_weather?.weathercode}}</p>
-           <p>Wind Speed: {{weatherDetails?.current_weather?.windspeed }} km/h</p>
-           <p>Wind Direction: {{weatherDetails?.current_weather?.winddirection}}</p>
-           <p>Latitude: {{ cityDetails.results[0].latitude }}</p>
-           <p>Longtitude: {{ cityDetails.results[0].longitude }}</p>
-           <p>Humidity: {{weatherDetails?.hourly?.relativehumidity_2m[0]}}</p>
+            <p><span> 🌅 </span> Sunrise: {{weatherDetails?.daily?.sunrise[0] | timeFormat}} AM  </p>
+            <p><span> 🌇 </span> Sunset: {{weatherDetails?.daily?.sunset[0] | timeFormat}} PM</p>
+            <p><span> ༄ </span> Wind Speed: {{weatherDetails?.current_weather?.windspeed }} km/h</p>
+            <p><span> 🎐 </span>Wind Direction: {{weatherDetails?.current_weather?.winddirection}}</p>
+            <p><span> ☔ </span>Rain precipitation: {{weatherDetails?.daily?.precipitation_sum[0]}} mm</p>
+            <p><span> 💧 </span> Humidity: {{weatherDetails?.hourly?.relativehumidity_2m[0]}}</p>
+            <p><span> ⛅ </span> Cloud Coverage:  {{weatherDetails?.hourly?.cloudcover_high[0]}} %</p>
         </div>
-    
     
 </div>
 

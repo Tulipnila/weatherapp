@@ -23,11 +23,12 @@ export class MapComponent implements OnInit, AfterViewInit {
                 this.selectedCity = this.shareData.getSelectedCity();
               }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.initMap();
+   }
   
   ngAfterViewInit() {
     this.searchCity();
-    this.initMap();
   }
   get cityDetails(){
     return this.shareData.cityDetails;
@@ -71,20 +72,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.marker = L.marker([28.63576,77.22445], { icon:customIcon }).addTo(this.map);
     // this.marker.bindPopup(``).openPopup();
   }
-  onCityNameChange(value: string) {
-    if(value.trim()=== '') {
-      this.filteredCities = [];
-    }
-    this.service.getCity(value, 5).subscribe(res => {
-      this.filteredCities = res.results;
-    });
-  }
   selectCity(city: any){
     this.selectedCity = city;
     this.cityName = city.name;
-    this.filteredCities=[];
     this.searchCity();
-    this.shareData.setSelectedCity(city);
+    this.marker?.setLatLng([city.latitude, city.longitude]);
+    this.filteredCities=[];
+
 
   }
 }

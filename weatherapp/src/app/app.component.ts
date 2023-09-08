@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'forecast';
+  title = 'Weatherapp';
+
+  menuDisplay:string='none';
+
+  toggleMenu(){
+    this.menuDisplay=(this.menuDisplay === 'block') ? 'none' : 'block'
+  }
 }

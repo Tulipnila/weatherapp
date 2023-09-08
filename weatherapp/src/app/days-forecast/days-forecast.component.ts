@@ -29,7 +29,10 @@ export class DaysForecastComponent implements OnInit  {
       this.forecastDates.push(nextDate);
     }
   }
-
+  isCurrentDate(date:Date):boolean{
+    const currentDate = new Date();
+    return date.toDateString()=== currentDate.toDateString();
+  }
   initializeForecastData() {
     for (let i = 0; i < 7; i++) {
       const forecastDay = {

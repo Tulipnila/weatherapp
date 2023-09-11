@@ -1,36 +1,30 @@
-<div class="fore-container">
-  
-
-  <div class="cast-container" *ngIf="weatherDetails">
-    <div class="cast" id="active" *ngFor="let forecast of forecastData; let i = index"><br>
-      <div class="daily">
-      <div class="day">{{shareData.getDayOfWeek(forecast.date)}}</div>
-        <div class="date">{{ forecast.date | date:'shortDate' }}</div>
-      </div>
-      <div class="temp">
-      <div class="high-temp">{{  weatherDetails?.daily?.temperature_2m_max[i] }} °</div>
-      <div class="low-temp">{{ weatherDetails?.daily?.temperature_2m_min[i]  }} °</div>
-      </div>
-      <div class="humidity">
-        <span> 😰 </span>
-        <div>{{weatherDetails?.hourly?.relativehumidity_2m[i] }}</div>
-      </div>
-      <div class="uvIndex">
-        <span>🕶 </span>
-        <div class="uv-des">{{ weatherDetails?.daily?.uv_index_max[i] }}</div>
-      </div>
-      <div class="precipitation">
-        <span> ☔️ </span>
-        <div>{{ weatherDetails?.daily?.precipitation_sum[i] }} mm</div>
-      </div>
-      <div class="windspeed">
-        <span>🍃</span>
-        <div>{{ weatherDetails?.daily?.windspeed_10m_max[i] }} m/s</div>
-      </div>
-      
+<div class="cast-container" *ngIf="weatherDetails">
+  <div class="cast" id="active" *ngFor="let forecast of forecastData; let i = index"><br>
+    <div class="daily">
+    <div class="day">{{shareData.getDayOfWeek(forecast.date)}}</div>
+      <div class="date">{{ forecast.date | date:'shortDate' }}</div>
     </div>
+    <div class="temp">
+    <div class="high-temp">{{  weatherDetails?.daily?.temperature_2m_max[i] }} °</div>
+    <div class="low-temp">{{ weatherDetails?.daily?.temperature_2m_min[i]  }} °</div>
+    </div>
+    <div class="humidity">
+      <span> 😰 </span>
+      <div>{{weatherDetails?.hourly?.relativehumidity_2m[i] }}</div>
+    </div>
+    <div class="uvIndex">
+      <span>🕶 </span>
+      <div class="uv-des">{{ weatherDetails?.daily?.uv_index_max[i] }}</div>
+    </div>
+    <div class="precipitation">
+      <span> ☔️ </span>
+      <div>{{ weatherDetails?.daily?.precipitation_sum[i] }} mm</div>
+    </div>
+    <div class="windspeed">
+      <span>🍃</span>
+      <div>{{ weatherDetails?.daily?.windspeed_10m_max[i] }} m/s</div>
+    </div>
+    
   </div>
-
-  
 </div>
 

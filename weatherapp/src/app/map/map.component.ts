@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { DataService } from '../services/data.service';
 import { ShareDataService } from '../services/share-data.service';
+import { Map, LatLng, LeafletMouseEvent } from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -12,23 +13,36 @@ export class MapComponent implements OnInit, AfterViewInit {
   private map: L.Map | undefined;
   private marker:L.Marker| undefined;
 
-  cityName:any;
+  cityName=this.shareData.cityDetails.results[0].name;
   count:any[]=[];
-
+  
   filteredCities: any[] = [];
   selectedCity:any[]=[];
   
   constructor(public service:DataService,
-              public shareData:ShareDataService) {
-                this.selectedCity = this.shareData.getSelectedCity();
-              }
+              public shareData:ShareDataService) {}
 
   ngOnInit() {
     this.initMap();
+    this.searchCity();
+
+
    }
   
   ngAfterViewInit() {
     this.searchCity();
+
+    // this.map?.on('click', this.onMapClick.bind(this));
+  }
+
+  // onMapClick(e.LeafletMouseEvent){
+  //   const lat = e.latlng.lat;
+  //   const lon = e.latlng.lng;
+
+  //   this.getCityNameFromCoordinates(lat,lon);
+  // }
+  getCityNameFromCoordinates(lat:number,lon:number){
+    this.shareData.weatherDetails(lat,lon).sub
   }
   get cityDetails(){
     return this.shareData.cityDetails;
@@ -37,22 +51,19 @@ export class MapComponent implements OnInit, AfterViewInit {
      return this.shareData.weatherDetails;
    }
   searchCity() {
+    this.shareData.selectedCity$.subscribe((city) => {
+      if (city) {
+        // Update the map with the selected city information
+        this.selectCity = city;
+        const lat = city.latitude;
+        const lon = city.longitude;
 
-      if (this.cityDetails.results && this.cityDetails.results.length > 0) {
-        const lat = this.cityDetails.results[0].latitude;
-        const lon = this.cityDetails.results[0].longitude;
-
-        console.log('latitude:',lat);
-        console.log('longitude:',lon);
-  
         this.marker?.setLatLng([lat, lon]);
-        this.marker?.bindPopup('Location:',this.cityName).openPopup();
-        this.map?.setView([lat, lon], 13);
-
+        this.marker?.bindPopup(`Location: ${city.name}`).openPopup();
+        this.map?.setView([lat, lon], 8);
       }
-    };
-  
-
+    });
+  }
   private initMap() {
     this.map = L.map('map', {
       center: [28.63576,77.22445], 
@@ -60,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
 
     const customIcon = L.icon({
@@ -70,7 +81,16 @@ export class MapComponent implements OnInit, AfterViewInit {
       popupAnchor:[0,-32],
     });
     this.marker = L.marker([28.63576,77.22445], { icon:customIcon }).addTo(this.map);
-    // this.marker.bindPopup(``).openPopup();
+    this.marker.bindPopup(`Location: ${this.cityName}`).openPopup();
+  }
+
+  onCityNameChange(value: string) {
+    if(value.trim()=== '') {
+      this.filteredCities = [];
+    }
+    this.service.getCity(value, 5).subscribe(res => {
+      this.filteredCities = res.results;
+    });
   }
   selectCity(city: any){
     this.selectedCity = city;
@@ -78,6 +98,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.searchCity();
     this.marker?.setLatLng([city.latitude, city.longitude]);
     this.filteredCities=[];
+    this.shareData.setSelectedCity(city);
+
 
 
   }

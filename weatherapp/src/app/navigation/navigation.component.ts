@@ -25,9 +25,7 @@ selectedCity:any[]=[];
 
   constructor(private service: DataService,
               public shareData: ShareDataService,
-              private elementRef:ElementRef){
-                this.selectedCity = this.shareData.getSelectedCity();
-               }
+              private elementRef:ElementRef){}
   ngOnInit(): void {
     this.onSearch();
   }

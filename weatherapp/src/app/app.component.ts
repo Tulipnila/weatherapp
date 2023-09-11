@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Weatherapp';
 
-  menuDisplay:string='none';
-
-  toggleMenu(){
-    this.menuDisplay=(this.menuDisplay === 'block') ? 'none' : 'block'
-  }
 }

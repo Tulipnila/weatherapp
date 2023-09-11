@@ -146,7 +146,6 @@ h2{
     }
     
 }
-
 @media(max-width:500px){
     
      .nav-container{
@@ -186,6 +185,5 @@ h2{
         position: absolute;
         right:-20px;
     }
-         
         
 }

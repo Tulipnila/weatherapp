@@ -118,31 +118,4 @@ hr{
         grid-row:3/4;
         margin-top:40px;
     }
-    
-    /* .menu-icon{
-        display: block;
-        width: 18px;
-        height: 3px;
-        background-color:white;
-        position:absolute;
-        top:130px;
-        cursor: pointer;
-        z-index: 3;
-    }
-    .menu-icon::before{
-        content:"";
-        width:18px;
-        height: 3px;
-        background-color: white;
-        position: absolute;
-        top:6px;
-    }
-    .menu-icon::after{
-        content:"";
-        width:18px;
-        height: 3px;
-        background-color: white;
-        position: absolute;
-        top: -6px;
-    } */
 }
